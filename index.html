@@ -43,7 +43,10 @@ button{cursor:pointer}
   padding:max(18px,env(safe-area-inset-top)) 20px calc(86px + var(--safe-b));
   overflow-y:auto;-webkit-overflow-scrolling:touch}
 .screen.active{display:flex}
-#cover,#welcome{padding-bottom:max(28px,var(--safe-b));align-items:center;justify-content:center;text-align:center}
+#cover{padding:0;align-items:stretch;justify-content:flex-end;text-align:center;background:#05070d center/cover no-repeat url("cover.jpg")}
+#cover:before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,7,13,.82) 0%,rgba(5,7,13,.15) 38%,transparent 62%);pointer-events:none}
+#cover .open-wrap{position:relative;z-index:1;padding:0 22px max(28px,var(--safe-b)) 22px}
+#welcome{padding-bottom:max(28px,var(--safe-b));align-items:center;justify-content:center;text-align:center}
 .frame{width:100%;max-width:420px;border:1px solid rgba(224,184,74,.45);border-radius:28px;padding:34px 22px 28px;
   background:linear-gradient(165deg,rgba(246,231,161,.08),rgba(45,212,191,.04) 45%,rgba(244,114,182,.05)),rgba(5,7,13,.62);
   box-shadow:0 22px 60px rgba(0,0,0,.45)}
@@ -131,15 +134,8 @@ textarea::placeholder{color:rgba(167,159,174,.7)}
 <body>
 <div class="sky"></div>
 <div class="app">
-  <section id="cover" class="screen active">
-    <div class="frame">
-      <div class="mark" aria-hidden="true">
-        <svg viewBox="0 0 64 64" fill="none"><defs><linearGradient id="h" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2dd4bf"/><stop offset="1" stop-color="#f9a8d4"/></linearGradient></defs><path d="M32 50C30.5 48.8 16 38.2 16 27.5a9.5 9.5 0 0 1 15.2-7.5A9.5 9.5 0 0 1 48 27.5C48 38.2 33.5 48.8 32 50z" fill="url(#h)"/></svg>
-      </div>
-      <div class="kicker">Daily practice</div>
-      <h1><span class="a">Seren</span><span class="b">ity</span></h1>
-      <p class="sub">Gratitude Journal</p>
-      <p class="lede">A quiet page for what was good. Nothing leaves this device.</p>
+  <section id="cover" class="screen active" aria-label="Serenity Gratitude Journal">
+    <div class="open-wrap">
       <button class="btn" id="open">Open journal</button>
       <p class="fine">Pause. Notice. Write it down.</p>
     </div>

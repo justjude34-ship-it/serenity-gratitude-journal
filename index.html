@@ -5,384 +5,304 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="theme-color" content="#05070d"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="description" content="Serenity Gratitude Journal — a quiet daily practice. Pause. Notice. Write it down. Private, offline, buy once."/>
 <meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="description" content="Serenity Gratitude Journal — a quiet daily practice. Private, on this device, buy once."/>
 <title>Serenity — Gratitude Journal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Serenity%20Gratitude%20Journal%22%2C%22short_name%22%3A%22Serenity%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%2305070d%22%2C%22theme_color%22%3A%22%2305070d%22%7D"/>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%232dd4bf'/%3E%3Cstop offset='1' stop-color='%23f9a8d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2305070d'/%3E%3Cpath d='M32 48C30.5 46.8 16 36.2 16 25.5a9.5 9.5 0 0 1 15.2-7.5A9.5 9.5 0 0 1 48 25.5C48 36.2 33.5 46.8 32 48z' fill='url(%23g)'/%3E%3C/svg%3E"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305070d'/%3E%3Cpath d='M32 48C30.5 46.8 16 36.2 16 25.5a9.5 9.5 0 0 1 15.2-7.5A9.5 9.5 0 0 1 48 25.5C48 36.2 33.5 46.8 32 48z' fill='%232dd4bf'/%3E%3C/svg%3E"/>
 <style>
-:root{
-  --bg:#05070d;--card:rgba(12,18,32,.82);--line:rgba(244,239,231,.1);
-  --teal:#2dd4bf;--teal-deep:#14b8a6;--pink:#f9a8d4;--pink-deep:#f472b6;
-  --gold:#f6e7a1;--gold-mid:#e0b84a;--green:#4ade80;--blue:#7dd3fc;--lilac:#c4b5fd;
-  --ink:#f4efe7;--muted:#a79fae;--display:'Cormorant Garamond',Georgia,serif;
-  --ui:'Outfit',system-ui,sans-serif;--safe-b:env(safe-area-inset-bottom,0px);
-}
+:root{--bg:#05070d;--card:rgba(12,18,32,.84);--line:rgba(244,239,231,.12);--teal:#2dd4bf;--teal-deep:#14b8a6;--pink:#f9a8d4;--gold:#f6e7a1;--gold-mid:#e0b84a;--ink:#f4efe7;--muted:#a79fae;--display:'Cormorant Garamond',Georgia,serif;--ui:'Outfit',system-ui,sans-serif;--safe:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:var(--bg);color:var(--ink);font-family:var(--ui);font-weight:300;-webkit-font-smoothing:antialiased;overflow:hidden}
-button,input,textarea{font:inherit;color:inherit;background:transparent;border:none;outline:none}
+html,body{height:100%;background:#05070d;color:var(--ink);font-family:var(--ui);font-weight:300;overflow:hidden}
+button,input,textarea{font:inherit;color:inherit;background:none;border:none;outline:none}
 button{cursor:pointer}
-.app{height:100%;position:relative}
-.sky{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 70% 42% at 16% 6%,rgba(45,212,191,.16),transparent 55%),
-    radial-gradient(ellipse 60% 40% at 90% 16%,rgba(244,114,182,.12),transparent 50%),
-    radial-gradient(ellipse 50% 30% at 50% 60%,rgba(224,184,74,.07),transparent 55%),
-    #05070d}
-.sky:before{content:"";position:absolute;inset:0;opacity:.7;
-  background-image:
-    radial-gradient(1.4px 1.4px at 12% 22%,rgba(255,255,255,.5),transparent),
-    radial-gradient(1px 1px at 72% 14%,rgba(255,255,255,.45),transparent),
-    radial-gradient(1px 1px at 40% 70%,rgba(246,231,161,.4),transparent),
-    radial-gradient(1.2px 1.2px at 84% 62%,rgba(255,255,255,.3),transparent)}
-.screen{position:absolute;inset:0;z-index:1;display:none;flex-direction:column;
-  padding:max(18px,env(safe-area-inset-top)) 20px calc(86px + var(--safe-b));
-  overflow-y:auto;-webkit-overflow-scrolling:touch}
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 42% at 16% 6%,rgba(45,212,191,.16),transparent 55%),radial-gradient(ellipse 60% 40% at 90% 16%,rgba(244,114,182,.12),transparent 50%),#05070d}
+.screen{position:absolute;inset:0;z-index:1;display:none;flex-direction:column;padding:max(18px,env(safe-area-inset-top)) 18px calc(84px + var(--safe));overflow:auto}
 .screen.active{display:flex}
-#cover{padding:0;align-items:stretch;justify-content:flex-end;text-align:center;background:#05070d center/cover no-repeat url("cover.jpg")}
-#cover:before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,7,13,.82) 0%,rgba(5,7,13,.15) 38%,transparent 62%);pointer-events:none}
-#cover .open-wrap{position:relative;z-index:1;padding:0 22px max(28px,var(--safe-b)) 22px}
-#welcome{padding-bottom:max(28px,var(--safe-b));align-items:center;justify-content:center;text-align:center}
-.frame{width:100%;max-width:420px;border:1px solid rgba(224,184,74,.45);border-radius:28px;padding:34px 22px 28px;
-  background:linear-gradient(165deg,rgba(246,231,161,.08),rgba(45,212,191,.04) 45%,rgba(244,114,182,.05)),rgba(5,7,13,.62);
-  box-shadow:0 22px 60px rgba(0,0,0,.45)}
-.mark{width:72px;height:72px;margin:0 auto 18px;border-radius:20px;display:grid;place-items:center;
-  background:#05070d;border:1px solid rgba(255,255,255,.08);box-shadow:0 0 32px rgba(45,212,191,.28)}
-.mark svg{width:42px;height:42px}
-.kicker{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:10px}
-h1{font-family:var(--display);font-weight:600;font-size:clamp(46px,12vw,60px);line-height:.95;letter-spacing:-.02em}
-h1 .a{color:#5eead4}h1 .b{color:var(--pink)}
-.sub{font-family:var(--display);font-style:italic;font-size:22px;margin:8px 0 16px}
-.lede{color:var(--muted);font-size:15px;line-height:1.55;max-width:32ch;margin:0 auto 26px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:14px 28px;border-radius:999px;
-  background:linear-gradient(135deg,var(--teal-deep),var(--teal));color:#042f2e;font-weight:600;width:min(100%,280px)}
-.btn:active{transform:scale(.98)}
-.ghost{background:transparent;border:1px solid rgba(45,212,191,.35);color:var(--teal);margin-top:10px}
-.fine{margin-top:22px;font-size:12px;color:rgba(167,159,174,.8)}
-.welcome-cards{display:flex;flex-direction:column;gap:12px;width:100%;max-width:420px;text-align:left;margin:18px 0 22px}
-.wcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+#cover{padding:0;justify-content:flex-end;align-items:center;background:#05070d center/cover no-repeat url("cover-phone.jpg")}
+#cover:before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,7,13,.88),transparent 46%)}
+#cover .open-wrap,#lock .open-wrap{position:relative;z-index:1;width:min(100%,420px);padding:0 22px max(28px,var(--safe));text-align:center}
+#welcome,#lock{align-items:center;justify-content:center;text-align:center;padding-bottom:max(28px,var(--safe))}
+.frame{width:min(100%,420px);border:1px solid rgba(224,184,74,.4);border-radius:28px;padding:28px 20px;background:rgba(5,7,13,.72)}
+.kicker{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:500}
+h1,h2.hello{font-family:var(--display);font-weight:600;line-height:1}
+h1{font-size:42px;margin:8px 0 14px}
+.hello{font-size:32px}
+.lede{color:var(--muted);font-size:15px;line-height:1.5}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:14px 26px;border-radius:999px;background:linear-gradient(135deg,var(--teal-deep),var(--teal));color:#042f2e;font-weight:600;width:min(100%,280px)}
+.btn.wide{width:100%}
+.fine{margin-top:12px;font-size:12px;color:rgba(167,159,174,.85)}
+.wcard{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:10px 0}
 .wcard b{display:block;font-weight:500;margin-bottom:4px}
-.wcard span{color:var(--muted);font-size:14px;line-height:1.45}
-.head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.head{margin-bottom:14px}
 .brand{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:500}
-.hello{font-family:var(--display);font-size:32px;font-weight:600;line-height:1}
-.date-line{color:var(--muted);font-size:13px;margin-top:2px}
-.prompt{background:var(--card);border:1px solid rgba(224,184,74,.28);border-radius:18px;padding:16px;margin-bottom:14px}
-.prompt .who{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.prompt{background:var(--card);border:1px solid rgba(224,184,74,.28);border-radius:18px;padding:16px;margin-bottom:12px}
 .prompt p{font-family:var(--display);font-style:italic;font-size:22px;line-height:1.25}
-.prompt button{margin-top:10px;color:var(--teal);font-size:13px;font-weight:500}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
-.stat small{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}
-.stat strong{font-size:22px;font-weight:600}
-.week{display:flex;gap:8px;overflow:auto;margin:6px 0 16px;scrollbar-width:none}
-.day{flex:0 0 52px;height:68px;border-radius:14px;background:var(--card);border:1px solid rgba(255,255,255,.06);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
-.day b{font-size:16px;font-weight:500}.day span{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.day.on{border-color:rgba(45,212,191,.5)}.day.now{background:linear-gradient(160deg,#14b8a6,#0f766e);border-color:transparent}
-.day.now span,.day.now b{color:#fff}
-.section{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:8px 0 10px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
-.row{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px}
-.chip{font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.06)}
-.chip.Grateful{color:#fbcfe8;background:rgba(244,114,182,.16)}
-.chip.Glad{color:var(--gold);background:rgba(243,214,122,.14)}
-.chip.Calm{color:#bbf7d0;background:rgba(74,222,128,.14)}
-.chip.Tired{color:#bae6fd;background:rgba(125,211,252,.14)}
-.chip.Low{color:#e9d5ff;background:rgba(196,181,253,.14)}
-.bless{font-size:15px;line-height:1.45;padding-left:14px;position:relative;margin:4px 0}
-.bless:before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--teal)}
-.note{margin-top:8px;color:var(--muted);font-size:13px;font-style:italic}
-.field{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;gap:10px;margin-bottom:10px}
-.num{width:26px;height:26px;border-radius:50%;border:1px solid var(--teal);color:var(--teal);display:grid;place-items:center;flex:0 0 auto;font-size:12px;margin-top:4px}
-textarea{width:100%;min-height:52px;resize:none;line-height:1.45;font-size:16px}
-textarea::placeholder{color:rgba(167,159,174,.7)}
-.linkish{color:var(--teal);font-size:14px;font-weight:500;padding:6px 0 16px;text-align:left}
-.moods{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-.mood{padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.1);color:var(--muted);font-size:13px;font-weight:500}
-.mood.on{color:#fff}
-.mood[data-mood="Grateful"].on{background:rgba(244,114,182,.22);border-color:var(--pink-deep)}
-.mood[data-mood="Glad"].on{background:rgba(224,184,74,.2);border-color:var(--gold-mid);color:var(--gold)}
-.mood[data-mood="Calm"].on{background:rgba(74,222,128,.18);border-color:var(--green)}
-.mood[data-mood="Tired"].on{background:rgba(125,211,252,.18);border-color:var(--blue)}
-.mood[data-mood="Low"].on{background:rgba(196,181,253,.18);border-color:var(--lilac)}
-.search{width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;font-size:15px}
-.filters{display:flex;gap:6px;overflow:auto;margin-bottom:14px;scrollbar-width:none}
-.filters button{flex:0 0 auto;padding:8px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:13px}
-.filters button.on{color:#042f2e;background:var(--teal);border-color:transparent}
-.month{font-family:var(--display);font-size:24px;margin:12px 0 8px}
-.tools{display:flex;flex-direction:column;gap:10px}
-.tools button,.tools label{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
-.tools small{display:block;color:var(--muted);margin-top:3px}
-.nav{position:fixed;left:12px;right:12px;bottom:calc(10px + var(--safe-b));z-index:5;
-  display:none;grid-template-columns:repeat(4,1fr);gap:4px;padding:6px;
-  background:rgba(8,10,16,.88);border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(16px)}
+.prompt button,.linkish{color:var(--teal);font-weight:500;font-size:14px;margin-top:8px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.stat,.card,.field,.tool{background:var(--card);border:1px solid var(--line);border-radius:16px}
+.stat{padding:12px}.stat small{display:block;color:var(--muted);font-size:12px}.stat strong{font-size:20px;font-weight:500}
+.section{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:10px 0 8px}
+.week,.filters,.sets{display:flex;gap:8px;overflow:auto;scrollbar-width:none;margin-bottom:12px}
+.day{flex:0 0 48px;height:64px;border-radius:14px;background:var(--card);border:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.day.on{border-color:rgba(45,212,191,.5)}.day.now{background:#0f766e}
+.day span{font-size:10px;color:var(--muted);text-transform:uppercase}.day b{font-size:16px;font-weight:500}
+.card{padding:14px;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.chip{font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.06)}
+.bless{padding-left:14px;position:relative;margin:5px 0;line-height:1.4}.bless:before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.note{margin-top:8px;color:var(--muted);font-style:italic;font-size:13px}
+.field{padding:12px;display:flex;gap:10px;margin-bottom:8px}
+.num{width:26px;height:26px;border-radius:50%;border:1px solid var(--teal);color:var(--teal);display:grid;place-items:center;flex:0 0 auto;font-size:12px}
+textarea,input.search,input.pin{width:100%;font-size:16px}
+textarea{min-height:48px;resize:none;line-height:1.45}
+textarea::placeholder,input::placeholder{color:rgba(167,159,174,.7)}
+.mood,.filters button,.sets button{padding:9px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:13px;flex:0 0 auto}
+.mood.on,.filters button.on,.sets button.on{background:var(--teal);color:#042f2e;border-color:transparent}
+.moods{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.search{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
+.month{font-family:var(--display);font-size:26px;margin:8px 0}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal i{text-align:center;font-size:11px;color:var(--muted);font-style:normal}
+.cal b{aspect-ratio:1;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.03);font-weight:500}
+.cal b.on{background:rgba(45,212,191,.2);color:var(--teal);border:1px solid rgba(45,212,191,.4)}
+.tools{display:flex;flex-direction:column;gap:8px}
+.tool{padding:14px;text-align:left;width:100%}
+.tool small{display:block;color:var(--muted);margin-top:3px}
+.nav{position:fixed;left:12px;right:12px;bottom:calc(8px + var(--safe));z-index:5;display:none;grid-template-columns:repeat(5,1fr);gap:2px;padding:6px;background:rgba(8,10,16,.9);border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(14px)}
 .nav.show{display:grid}
-.nav button{padding:8px 4px;border-radius:12px;color:var(--muted);font-size:11px;font-weight:500}
+.nav button{padding:8px 2px;border-radius:12px;color:var(--muted);font-size:10px;font-weight:500}
 .nav button.on{color:var(--ink);background:rgba(45,212,191,.12)}
-.toast{position:fixed;left:50%;bottom:calc(92px + var(--safe-b));transform:translateX(-50%) translateY(140%);
-  background:#0e1424;border:1px solid var(--line);padding:12px 16px;border-radius:12px;z-index:9;transition:.3s;font-size:14px}
+.toast{position:fixed;left:50%;bottom:calc(88px + var(--safe));transform:translateX(-50%) translateY(140%);background:#0e1424;border:1px solid var(--line);padding:12px 16px;border-radius:12px;z-index:9;transition:.3s}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.empty{color:var(--muted);text-align:center;padding:24px 8px;line-height:1.5}
-@media(min-width:520px){.screen{max-width:460px;left:50%;transform:translateX(-50%);width:100%}.nav{max-width:436px;left:50%;transform:translateX(-50%)}}
+.empty{color:var(--muted);text-align:center;padding:22px 8px;line-height:1.5}
+.star{color:var(--gold);font-size:18px}
+@media(min-width:520px){.screen{max-width:460px;left:50%;width:100%;transform:translateX(-50%)}.nav{max-width:436px;left:50%;transform:translateX(-50%)}}
 </style>
 </head>
 <body>
 <div class="sky"></div>
 <div class="app">
-  <section id="cover" class="screen active" aria-label="Serenity Gratitude Journal">
-    <div class="open-wrap">
-      <button class="btn" id="open">Open journal</button>
-      <p class="fine">Pause. Notice. Write it down.</p>
-    </div>
-  </section>
-
-  <section id="welcome" class="screen">
-    <div class="frame">
-      <div class="kicker">Before you begin</div>
-      <h1 style="font-size:40px">Three quiet things</h1>
-      <div class="welcome-cards">
-        <div class="wcard"><b>One page is enough</b><span>Three blessings, a mood, and an optional line. A short entry still counts.</span></div>
-        <div class="wcard"><b>Prompts, if you want them</b><span>A different question each day, so you are not staring at a blank page.</span></div>
-        <div class="wcard"><b>It stays here</b><span>No account, no upload. Export a copy whenever you want one.</span></div>
-      </div>
-      <button class="btn" id="begin">Begin</button>
-    </div>
-  </section>
-
-  <section id="home" class="screen">
-    <div class="head"><div><div class="brand">Serenity</div><div class="hello" id="hello">Good evening</div><div class="date-line" id="todayLine"></div></div></div>
-    <div class="prompt"><div class="who">Today’s prompt</div><p id="homePrompt"></p><button type="button" id="usePrompt">Write from this</button></div>
-    <div class="stats">
-      <div class="stat"><small>Streak</small><strong id="streak">0</strong></div>
-      <div class="stat"><small>This week</small><strong id="weekCount">0</strong></div>
-      <div class="stat"><small>Entries</small><strong id="total">0</strong></div>
-      <div class="stat"><small>Usual mood</small><strong id="topMood" style="font-size:18px">—</strong></div>
-    </div>
-    <div class="section">This week</div>
-    <div class="week" id="week"></div>
-    <div class="section">Recent pages</div>
-    <div id="recent"></div>
-  </section>
-
-  <section id="write" class="screen">
-    <div class="head"><div><div class="brand">Write</div><div class="hello" style="font-size:28px">Today’s blessings</div></div></div>
-    <div class="prompt"><div class="who">A place to start</div><p id="writePrompt"></p><button type="button" id="shuffle">Another prompt</button></div>
-    <div id="fields"></div>
-    <button class="linkish" id="addLine" type="button">Add another line</button>
-    <div class="section">How are you landing</div>
-    <div class="moods" id="moods">
-      <button class="mood" data-mood="Grateful" type="button">Grateful</button>
-      <button class="mood" data-mood="Glad" type="button">Glad</button>
-      <button class="mood" data-mood="Calm" type="button">Calm</button>
-      <button class="mood" data-mood="Tired" type="button">Tired</button>
-      <button class="mood" data-mood="Low" type="button">Low</button>
-    </div>
-    <div class="field"><textarea id="why" placeholder="Optional — why it mattered, in a sentence."></textarea></div>
-    <button class="btn" id="save" style="width:100%">Save this page</button>
-  </section>
-
-  <section id="history" class="screen">
-    <div class="head"><div><div class="brand">Journal</div><div class="hello" style="font-size:28px">Your pages</div></div></div>
-    <input class="search" id="q" placeholder="Search a word, a name, a mood"/>
-    <div class="filters" id="filters"></div>
-    <div id="list"></div>
-  </section>
-
-  <section id="about" class="screen">
-    <div class="head"><div><div class="brand">Serenity</div><div class="hello" style="font-size:28px">Yours alone</div></div></div>
-    <p class="lede" style="margin:0 0 16px;text-align:left;max-width:none">A gratitude practice, not therapy and not a crisis service. If you are in danger, call 000. Lifeline is 13 11 14.</p>
-    <div class="tools">
-      <button type="button" id="exportText">Export as text<small>A readable copy of every page.</small></button>
-      <button type="button" id="exportJson">Export as file<small>Keep a backup you can bring back later.</small></button>
-      <label>Bring a backup back<input id="importFile" type="file" accept="application/json" hidden/><small>Choose a Serenity export file.</small></label>
-      <button type="button" id="erase">Erase this journal<small>Removes every page from this device.</small></button>
-    </div>
-  </section>
+<section id="cover" class="screen active" aria-label="Serenity">
+  <div class="open-wrap"><button class="btn" id="open">Open journal</button><p class="fine">Pause. Notice. Write it down.</p></div>
+</section>
+<section id="lock" class="screen">
+  <div class="frame"><div class="kicker">Private</div><h1>Welcome back</h1><p class="lede">Enter your four-digit screen code.</p><input class="pin" id="pinTry" inputmode="numeric" maxlength="4" placeholder="••••" style="text-align:center;letter-spacing:.4em;font-size:28px;margin:16px 0"/><button class="btn" id="unlock">Unlock</button></div>
+</section>
+<section id="welcome" class="screen">
+  <div class="frame"><div class="kicker">Before you begin</div><h1>A journal worth keeping</h1>
+    <div class="wcard"><b>Three lines is enough</b><span class="lede">A short page still counts toward your streak.</span></div>
+    <div class="wcard"><b>Prompts when the page is blank</b><span class="lede">People, home, body, small things, animals.</span></div>
+    <div class="wcard"><b>It never leaves this device</b><span class="lede">Export a copy whenever you want one.</span></div>
+    <button class="btn" id="begin">Begin</button>
+  </div>
+</section>
+<section id="home" class="screen">
+  <div class="head"><div class="brand">Serenity</div><h2 class="hello" id="hello">Good evening</h2><p class="lede" id="todayLine"></p></div>
+  <img src="hero.jpg" alt="Serenity" style="width:100%;height:168px;object-fit:cover;border-radius:18px;margin-bottom:12px;border:1px solid rgba(224,184,74,.28)"/>
+  <div class="prompt"><div class="kicker">Today’s prompt</div><p id="homePrompt"></p><button type="button" id="usePrompt">Write from this</button></div>
+  <div class="stats">
+    <div class="stat"><small>Streak</small><strong id="streak">0</strong></div>
+    <div class="stat"><small>Longest</small><strong id="longest">0</strong></div>
+    <div class="stat"><small>Pages</small><strong id="total">0</strong></div>
+    <div class="stat"><small>Words</small><strong id="words">0</strong></div>
+  </div>
+  <div class="section">This week</div><div class="week" id="week"></div>
+  <div class="section">Kept close</div><div id="stars"></div>
+  <div class="section">Recent pages</div><div id="recent"></div>
+</section>
+<section id="write" class="screen">
+  <div class="head"><div class="brand" id="writeBrand">Write</div><h2 class="hello" style="font-size:28px" id="writeTitle">Today’s blessings</h2></div>
+  <div class="sets" id="sets"></div>
+  <div class="prompt"><p id="writePrompt"></p><button type="button" id="shuffle">Another prompt</button></div>
+  <div id="fields"></div>
+  <button class="linkish" id="addLine" type="button">Add another line</button>
+  <div class="section">How are you landing</div>
+  <div class="moods" id="moods"></div>
+  <div class="field"><textarea id="why" placeholder="Optional — why it mattered."></textarea></div>
+  <button class="btn wide" id="save">Save this page</button>
+</section>
+<section id="history" class="screen">
+  <div class="head"><div class="brand">Journal</div><h2 class="hello" style="font-size:28px">Your pages</h2></div>
+  <input class="search" id="q" placeholder="Search a word, a name, a pet"/>
+  <div class="filters" id="filters"></div>
+  <div id="list"></div>
+</section>
+<section id="page" class="screen">
+  <div class="head"><button class="linkish" id="backList" type="button">Back</button><h2 class="hello" style="font-size:28px" id="pageDate"></h2></div>
+  <div id="pageBody"></div>
+  <div class="tools" style="margin-top:12px">
+    <button class="tool" id="starBtn" type="button">Keep this page</button>
+    <button class="tool" id="editBtn" type="button">Edit</button>
+    <button class="tool" id="delBtn" type="button">Remove this page</button>
+  </div>
+</section>
+<section id="cal" class="screen">
+  <div class="head"><div class="brand">Calendar</div><h2 class="hello" style="font-size:28px" id="calTitle"></h2></div>
+  <div class="row" style="margin-bottom:10px"><button class="linkish" id="prev" type="button">Previous</button><button class="linkish" id="next" type="button">Next</button></div>
+  <div class="cal" id="calGrid"></div>
+</section>
+<section id="review" class="screen">
+  <div class="head"><div class="brand">This week</div><h2 class="hello" style="font-size:28px">What you noticed</h2></div>
+  <div id="reviewBody"></div>
+</section>
+<section id="about" class="screen">
+  <div class="head"><div class="brand">Serenity</div><h2 class="hello" style="font-size:28px">Yours alone</h2></div>
+  <p class="lede" style="margin-bottom:12px">A gratitude practice, not therapy and not a crisis service. In danger, call 000. Lifeline is 13 11 14.</p>
+  <div class="tools">
+    <button class="tool" id="exportText" type="button">Export as text<small>A readable copy of every page.</small></button>
+    <button class="tool" id="exportJson" type="button">Export a backup<small>Bring it back on another device.</small></button>
+    <label class="tool">Bring a backup back<input id="importFile" type="file" accept="application/json" hidden/><small>Choose a Serenity file.</small></label>
+    <button class="tool" id="setLock" type="button">Set a screen code<small>A quiet lock on this device. Not a bank vault.</small></button>
+    <button class="tool" id="install" type="button">Add to your home screen<small>Share, then Add to Home Screen.</small></button>
+    <button class="tool" id="erase" type="button">Erase this journal<small>Removes every page from this device.</small></button>
+  </div>
+</section>
 </div>
 <nav class="nav" id="nav">
   <button type="button" data-go="home">Today</button>
   <button type="button" data-go="write">Write</button>
   <button type="button" data-go="history">Journal</button>
+  <button type="button" data-go="cal">Month</button>
   <button type="button" data-go="about">About</button>
 </nav>
 <div class="toast" id="toast"></div>
 <script>
 (function(){
-  const KEY = 'serenity-gratitude-v1';
-  const SEEN = 'serenity-seen-welcome';
-  const PROMPTS = [
-    'What was quietly good today?',
-    'Who made the day a little lighter?',
-    'What small comfort did you notice?',
-    'What did your body get that it needed?',
-    'What ordinary thing are you glad still exists?',
-    'What went better than you expected?',
-    'Where did you feel safe, even briefly?',
-    'What would you thank yesterday for?',
-    'What colour, sound, or meal stayed with you?',
-    'What did you not have to carry alone?'
-  ];
-  const MOODS = ['All','Grateful','Glad','Calm','Tired','Low'];
-  let entries = load();
-  let mood = null;
-  let lines = 3;
-  let filter = 'All';
-  let promptIndex = dayIndex();
-
-  const $ = s => document.querySelector(s);
-  const $$ = s => [...document.querySelectorAll(s)];
-
-  function load(){
-    try{ const d = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(d) ? d : []; }
-    catch(e){ return []; }
-  }
-  function persist(){ localStorage.setItem(KEY, JSON.stringify(entries)); }
-  function todayKey(d=new Date()){
-    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-  }
-  function parseKey(k){ const [y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d); }
-  function dayIndex(){ const d=new Date(); return (d.getFullYear()*366+d.getMonth()*31+d.getDate()) % PROMPTS.length; }
-  function prompt(){ return PROMPTS[promptIndex % PROMPTS.length]; }
-  function greet(){
-    const h=new Date().getHours();
-    return h<12?'Good morning':h<17?'Good afternoon':'Good evening';
-  }
-  function toast(msg){
-    const t=$('#toast'); t.textContent=msg; t.classList.add('show');
-    clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('show'),2200);
-  }
+  const KEY='serenity-gratitude-v1', SEEN='serenity-seen-welcome', LOCK='serenity-lock';
+  const SETS={
+    Today:['What was quietly good today?','What went better than you expected?','What would you thank yesterday for?'],
+    People:['Who made the day a little lighter?','Who were you glad to hear from?','Who did you get to be kind to?'],
+    Home:['What in your home felt like shelter?','What ordinary comfort was still there?','What smell, light, or chair helped?'],
+    Body:['What did your body get that it needed?','Where did you feel even briefly safe?','What small ease did you notice?'],
+    Animals:['Which animal made you smile?','What soft, warm, or silly moment was there?','Who waited for you at the door?']
+  };
+  const MOODS=['Grateful','Glad','Calm','Tired','Low'];
+  let entries=load(), mood=null, lines=3, filter='All', setName='Today', promptIndex=0, editing=null, cursor=new Date(), openId=null;
+  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+  function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(d)?d:[]}catch(e){return[]}}
+  function persist(){localStorage.setItem(KEY,JSON.stringify(entries))}
+  function todayKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+  function parseKey(k){const [y,m,d]=k.split('-').map(Number);return new Date(y,m-1,d)}
+  function greet(){const h=new Date().getHours();return h<12?'Good morning':h<17?'Good afternoon':'Good evening'}
+  function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),2000)}
+  function esc(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&','<':'<','>':'>','"':'"'}[c]))}
+  function nice(k){return parseKey(k).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'})}
+  function prompts(){return SETS[setName]}
+  function prompt(){return prompts()[promptIndex%prompts().length]}
+  function words(){return entries.reduce((n,e)=>n+((e.blessings||[]).join(' ')+' '+(e.reflection||'')).trim().split(/\s+/).filter(Boolean).length,0)}
+  function streak(){const set=new Set(entries.map(e=>e.date));if(!set.size)return 0;let d=new Date();if(!set.has(todayKey(d))){d.setDate(d.getDate()-1);if(!set.has(todayKey(d)))return 0}let n=0;while(set.has(todayKey(d))){n++;d.setDate(d.getDate()-1)}return n}
+  function longest(){const days=[...new Set(entries.map(e=>e.date))].sort();let best=0,run=0,prev=null;days.forEach(k=>{const d=parseKey(k);if(prev&&(d-prev)===86400000)run++;else run=1;best=Math.max(best,run);prev=d});return best}
   function show(id){
     $$('.screen').forEach(s=>s.classList.remove('active'));
-    $('#'+id).classList.add('active');
-    $('#'+id).scrollTop=0;
-    const nav=$('#nav');
-    nav.classList.toggle('show', id!=='cover' && id!=='welcome');
-    $$('#nav button').forEach(b=>b.classList.toggle('on', b.dataset.go===id));
-    if(id==='home') renderHome();
-    if(id==='write') renderWrite();
-    if(id==='history') renderHistory();
+    $('#'+id).classList.add('active');$('#'+id).scrollTop=0;
+    const navOn=!['cover','welcome','lock'].includes(id);
+    $('#nav').classList.toggle('show',navOn);
+    $$('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.go===id||(id==='page'&&b.dataset.go==='history')||(id==='review'&&b.dataset.go==='cal')));
+    if(id==='home')renderHome();
+    if(id==='write')renderWrite();
+    if(id==='history')renderHistory();
+    if(id==='cal')renderCal();
+    if(id==='review')renderReview();
+    if(id==='page')renderPage();
   }
-  function streak(){
-    const set=new Set(entries.map(e=>e.date));
-    if(!set.size) return 0;
-    let d=new Date();
-    if(!set.has(todayKey(d))){ d.setDate(d.getDate()-1); if(!set.has(todayKey(d))) return 0; }
-    let n=0; while(set.has(todayKey(d))){ n++; d.setDate(d.getDate()-1); }
-    return n;
-  }
-  function weekCount(){
-    const cut=new Date(); cut.setDate(cut.getDate()-6); cut.setHours(0,0,0,0);
-    return entries.filter(e=>parseKey(e.date)>=cut).length;
-  }
-  function topMood(){
-    const c={}; entries.forEach(e=>{ if(e.mood) c[e.mood]=(c[e.mood]||0)+1; });
-    return Object.entries(c).sort((a,b)=>b[1]-a[1])[0]?.[0] || '—';
-  }
-  function esc(s){ return String(s||'').replace(/[&<>"]/g,c=>({'&':'&','<':'<','>':'>','"':'"'}[c])); }
-  function nice(k){ return parseKey(k).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'}); }
-
+  function card(e){return `<article class="card" data-id="${esc(e.id)}"><div class="row"><span>${nice(e.date)}${e.starred?' <span class="star">✦</span>':''}</span><span class="chip">${esc(e.mood||'')}</span></div>${(e.blessings||[]).map(b=>`<div class="bless">${esc(b)}</div>`).join('')}${e.reflection?`<div class="note">${esc(e.reflection)}</div>`:''}</article>`}
   function renderHome(){
     $('#hello').textContent=greet();
     $('#todayLine').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long'});
     $('#homePrompt').textContent=prompt();
-    $('#streak').textContent=streak();
-    $('#weekCount').textContent=weekCount();
-    $('#total').textContent=entries.length;
-    $('#topMood').textContent=topMood();
+    $('#streak').textContent=streak();$('#longest').textContent=longest();$('#total').textContent=entries.length;$('#words').textContent=words();
     const set=new Set(entries.map(e=>e.date));
-    const days=[];
-    for(let i=6;i>=0;i--){ const d=new Date(); d.setDate(d.getDate()-i); days.push(d); }
-    $('#week').innerHTML=days.map(d=>{
-      const k=todayKey(d); const now=k===todayKey();
-      return `<div class="day${set.has(k)?' on':''}${now?' now':''}"><span>${d.toLocaleDateString(undefined,{weekday:'short'})}</span><b>${d.getDate()}</b></div>`;
-    }).join('');
-    const recent=[...entries].sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,3);
-    $('#recent').innerHTML=recent.length?recent.map(card).join(''):'<p class="empty">No pages yet. Three lines is a beginning.</p>';
-  }
-  function card(e){
-    return `<article class="card"><div class="row"><span>${nice(e.date)}</span><span class="chip ${esc(e.mood)}">${esc(e.mood||'')}</span></div>${(e.blessings||[]).map(b=>`<div class="bless">${esc(b)}</div>`).join('')}${e.reflection?`<div class="note">${esc(e.reflection)}</div>`:''}</article>`;
+    $('#week').innerHTML=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-(6-i));const k=todayKey(d);return `<div class="day${set.has(k)?' on':''}${k===todayKey()?' now':''}"><span>${d.toLocaleDateString(undefined,{weekday:'short'})}</span><b>${d.getDate()}</b></div>`}).join('');
+    const starred=entries.filter(e=>e.starred).slice(-3).reverse();
+    $('#stars').innerHTML=starred.length?starred.map(card).join(''):'<p class="empty">Star a page to keep it close.</p>';
+    const recent=[...entries].sort((a,b)=>(b.createdAt||'').localeCompare(a.createdAt||'')).slice(0,3);
+    $('#recent').innerHTML=recent.length?recent.map(card).join('')+'<button class="linkish" id="toReview" type="button">See the week</button>':'<p class="empty">No pages yet. Three lines is a beginning.</p>';
   }
   function renderWrite(){
+    $('#sets').innerHTML=Object.keys(SETS).map(s=>`<button type="button" data-set="${s}" class="${s===setName?'on':''}">${s}</button>`).join('');
     $('#writePrompt').textContent=prompt();
-    $('#fields').innerHTML=Array.from({length:lines},(_,i)=>`<label class="field"><span class="num">${i+1}</span><textarea placeholder="${i?'Another blessing…':'I am grateful for…'}"></textarea></label>`).join('');
+    $('#moods').innerHTML=MOODS.map(m=>`<button class="mood${mood===m?' on':''}" data-mood="${m}" type="button">${m}</button>`).join('');
+    const existing=editing?entries.find(e=>e.id===editing):null;
+    $('#writeTitle').textContent=existing?'Edit this page':'Today’s blessings';
+    $('#fields').innerHTML=Array.from({length:lines},(_,i)=>`<label class="field"><span class="num">${i+1}</span><textarea>${existing&&existing.blessings[i]?esc(existing.blessings[i]):''}</textarea></label>`).join('');
+    if(existing){$('#why').value=existing.reflection||''}
   }
   function renderHistory(){
-    $('#filters').innerHTML=MOODS.map(m=>`<button type="button" class="${m===filter?'on':''}" data-f="${m}">${m}</button>`).join('');
+    const moods=['All','Kept',...MOODS];
+    $('#filters').innerHTML=moods.map(m=>`<button type="button" data-f="${m}" class="${m===filter?'on':''}">${m}</button>`).join('');
     const q=$('#q').value.trim().toLowerCase();
-    let list=[...entries].sort((a,b)=>b.date.localeCompare(a.date)||b.createdAt.localeCompare(a.createdAt));
-    if(filter!=='All') list=list.filter(e=>e.mood===filter);
-    if(q) list=list.filter(e=>[e.mood,...(e.blessings||[]),e.reflection].join(' ').toLowerCase().includes(q));
-    if(!list.length){ $('#list').innerHTML='<p class="empty">Nothing matches. The pages are still here.</p>'; return; }
-    let html='', month='';
-    list.forEach(e=>{
-      const m=parseKey(e.date).toLocaleDateString(undefined,{month:'long',year:'numeric'});
-      if(m!==month){ month=m; html+=`<h3 class="month">${m}</h3>`; }
-      html+=card(e);
-    });
+    let list=[...entries].sort((a,b)=>b.date.localeCompare(a.date)||(b.createdAt||'').localeCompare(a.createdAt||''));
+    if(filter==='Kept')list=list.filter(e=>e.starred);
+    else if(filter!=='All')list=list.filter(e=>e.mood===filter);
+    if(q)list=list.filter(e=>[e.mood,...(e.blessings||[]),e.reflection].join(' ').toLowerCase().includes(q));
+    if(!list.length){$('#list').innerHTML='<p class="empty">Nothing matches. The pages are still here.</p>';return}
+    let html='',month='';
+    list.forEach(e=>{const m=parseKey(e.date).toLocaleDateString(undefined,{month:'long',year:'numeric'});if(m!==month){month=m;html+=`<h3 class="month">${m}</h3>`}html+=card(e)});
     $('#list').innerHTML=html;
   }
-  function download(name, text, type){
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(new Blob([text],{type}));
-    a.download=name; a.click();
+  function renderPage(){
+    const e=entries.find(x=>x.id===openId);if(!e){show('history');return}
+    $('#pageDate').textContent=nice(e.date);
+    $('#pageBody').innerHTML=card(e);
+    $('#starBtn').textContent=e.starred?'Unpin this page':'Keep this page';
   }
+  function renderCal(){
+    const y=cursor.getFullYear(),m=cursor.getMonth();
+    $('#calTitle').textContent=cursor.toLocaleDateString(undefined,{month:'long',year:'numeric'});
+    const set=new Set(entries.map(e=>e.date));
+    const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
+    let html='SMTWTFS'.split('').map(d=>`<i>${d}</i>`).join('');
+    for(let i=0;i<first;i++)html+='<b></b>';
+    for(let d=1;d<=days;d++){const k=todayKey(new Date(y,m,d));html+=`<b class="${set.has(k)?'on':''}" data-day="${k}">${d}</b>`}
+    $('#calGrid').innerHTML=html;
+  }
+  function renderReview(){
+    const cut=new Date();cut.setDate(cut.getDate()-6);cut.setHours(0,0,0,0);
+    const list=entries.filter(e=>parseKey(e.date)>=cut);
+    $('#reviewBody').innerHTML=list.length?`<p class="lede" style="margin-bottom:12px">${list.length} page${list.length>1?'s':''} this week.</p>`+list.map(card).join(''):'<p class="empty">Nothing this week yet. One page starts it.</p>';
+  }
+  function download(name,text,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;a.click()}
+  function openEntry(id){openId=id;show('page')}
 
-  $('#open').onclick=()=> show(localStorage.getItem(SEEN)?'home':'welcome');
-  $('#begin').onclick=()=>{ localStorage.setItem(SEEN,'1'); show('home'); };
-  $('#usePrompt').onclick=()=>show('write');
-  $('#shuffle').onclick=()=>{ promptIndex=(promptIndex+1)%PROMPTS.length; renderWrite(); };
-  $('#addLine').onclick=()=>{ if(lines<6){ lines++; renderWrite(); } };
-  $('#moods').onclick=e=>{
-    const b=e.target.closest('.mood'); if(!b) return;
-    $$('.mood').forEach(m=>m.classList.remove('on'));
-    b.classList.add('on'); mood=b.dataset.mood;
-  };
+  $('#open').onclick=()=>{if(localStorage.getItem(LOCK))show('lock');else show(localStorage.getItem(SEEN)?'home':'welcome')};
+  $('#unlock').onclick=()=>{if($('#pinTry').value===localStorage.getItem(LOCK)){ $('#pinTry').value='';show('home')}else toast('That code does not match.')};
+  $('#begin').onclick=()=>{localStorage.setItem(SEEN,'1');show('home')};
+  $('#usePrompt').onclick=()=>{editing=null;show('write')};
+  $('#shuffle').onclick=()=>{promptIndex++;renderWrite()};
+  $('#addLine').onclick=()=>{if(lines<6){lines++;renderWrite()}};
+  $('#sets').onclick=e=>{const b=e.target.closest('[data-set]');if(!b)return;setName=b.dataset.set;promptIndex=0;renderWrite()};
+  $('#moods').onclick=e=>{const b=e.target.closest('.mood');if(!b)return;mood=b.dataset.mood;renderWrite()};
   $('#save').onclick=()=>{
     const blessings=$$('#fields textarea').map(t=>t.value.trim()).filter(Boolean);
-    if(!blessings.length){ toast('Write one blessing first.'); return; }
-    if(!mood){ toast('Choose how you are landing.'); return; }
-    entries.push({id:Date.now().toString(36),date:todayKey(),mood,blessings,reflection:$('#why').value.trim(),createdAt:new Date().toISOString()});
-    persist();
-    $('#why').value=''; mood=null; lines=3;
-    toast('Saved. Well noticed.');
-    show('home');
+    if(!blessings.length){toast('Write one blessing first.');return}
+    if(!mood){toast('Choose how you are landing.');return}
+    if(editing){const e=entries.find(x=>x.id===editing);if(e){e.blessings=blessings;e.mood=mood;e.reflection=$('#why').value.trim()}}
+    else entries.push({id:Date.now().toString(36),date:todayKey(),mood,blessings,reflection:$('#why').value.trim(),createdAt:new Date().toISOString(),starred:false});
+    persist();editing=null;$('#why').value='';mood=null;lines=3;toast('Saved. Well noticed.');show('home');
   };
   $('#q').oninput=renderHistory;
-  $('#filters').onclick=e=>{ const b=e.target.closest('[data-f]'); if(!b) return; filter=b.dataset.f; renderHistory(); };
-  $('#nav').onclick=e=>{ const b=e.target.closest('[data-go]'); if(b) show(b.dataset.go); };
-  $('#exportText').onclick=()=>{
-    const text=entries.map(e=>`${e.date} · ${e.mood}\n${(e.blessings||[]).map(b=>'• '+b).join('\n')}${e.reflection?'\n'+e.reflection:''}`).join('\n\n');
-    download('serenity-journal.txt', text||'No pages yet.','text/plain');
-  };
-  $('#exportJson').onclick=()=>download('serenity-journal.json', JSON.stringify(entries,null,2),'application/json');
-  $('#importFile').onchange=e=>{
-    const file=e.target.files[0]; if(!file) return;
-    const reader=new FileReader();
-    reader.onload=()=>{
-      try{
-        const data=JSON.parse(reader.result);
-        if(!Array.isArray(data)) throw new Error('bad');
-        const ids=new Set(entries.map(x=>x.id));
-        data.forEach(item=>{ if(item && item.date && !ids.has(item.id)) entries.push(item); });
-        persist(); toast('Backup brought back.'); show('history');
-      }catch(err){ toast('That file is not a Serenity backup.'); }
-    };
-    reader.readAsText(file);
-  };
-  $('#erase').onclick=()=>{
-    if(!confirm('Erase every page on this device? This cannot be undone.')) return;
-    entries=[]; persist(); toast('Journal cleared.'); show('home');
-  };
-
-  if('serviceWorker' in navigator){
-    const sw=`const C='serenity-v3';self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k)))));self.clients.claim()});`;
-    navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'text/javascript'}))).catch(()=>{});
-  }
+  $('#filters').onclick=e=>{const b=e.target.closest('[data-f]');if(!b)return;filter=b.dataset.f;renderHistory()};
+  document.body.addEventListener('click',e=>{
+    const cardEl=e.target.closest('[data-id]');if(cardEl&&!e.target.closest('#pageBody'))openEntry(cardEl.dataset.id);
+    if(e.target.id==='toReview')show('review');
+    const day=e.target.closest('[data-day]');if(day){const hit=entries.find(x=>x.date===day.dataset.day);if(hit)openEntry(hit.id);else toast('No page that day.')}
+    const go=e.target.closest('[data-go]');if(go){editing=null;show(go.dataset.go)}
+  });
+  $('#backList').onclick=()=>show('history');
+  $('#starBtn').onclick=()=>{const e=entries.find(x=>x.id===openId);if(!e)return;e.starred=!e.starred;persist();toast(e.starred?'Kept close.':'Unpinned.');renderPage()};
+  $('#editBtn').onclick=()=>{const e=entries.find(x=>x.id===openId);if(!e)return;editing=e.id;mood=e.mood;lines=Math.max(3,(e.blessings||[]).length);show('write')};
+  $('#delBtn').onclick=()=>{if(!confirm('Remove this page?'))return;entries=entries.filter(x=>x.id!==openId);persist();toast('Removed.');show('history')};
+  $('#prev').onclick=()=>{cursor.setMonth(cursor.getMonth()-1);renderCal()};
+  $('#next').onclick=()=>{cursor.setMonth(cursor.getMonth()+1);renderCal()};
+  $('#exportText').onclick=()=>download('serenity-journal.txt',entries.map(e=>`${e.date} · ${e.mood}\n${(e.blessings||[]).map(b=>'• '+b).join('\n')}${e.reflection?'\n'+e.reflection:''}`).join('\n\n')||'No pages yet.','text/plain');
+  $('#exportJson').onclick=()=>download('serenity-journal.json',JSON.stringify(entries,null,2),'application/json');
+  $('#importFile').onchange=e=>{const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);if(!Array.isArray(data))throw 0;const ids=new Set(entries.map(x=>x.id));data.forEach(item=>{if(item&&item.date&&!ids.has(item.id))entries.push(item)});persist();toast('Backup brought back.');show('history')}catch(err){toast('That file is not a Serenity backup.')}};r.readAsText(file)};
+  $('#setLock').onclick=()=>{const code=prompt('Choose a 4-digit screen code. Leave blank to remove it.','');if(code===null)return;if(!code){localStorage.removeItem(LOCK);toast('Screen code removed.');return}if(!/^\d{4}$/.test(code)){toast('Use four digits.');return}localStorage.setItem(LOCK,code);toast('Screen code set.')};
+  $('#install').onclick=()=>toast('In your browser menu, choose Add to Home Screen.');
+  $('#erase').onclick=()=>{if(!confirm('Erase every page on this device?'))return;entries=[];persist();toast('Journal cleared.');show('home')};
 })();
 </script>
 </body>

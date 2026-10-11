@@ -116,7 +116,7 @@ textarea::placeholder,input::placeholder{color:rgba(167,159,174,.7)}
   <div class="section">Recent pages</div><div id="recent"></div>
 </section>
 <section id="write" class="screen">
-  <div class="head"><div class="brand" id="writeBrand">Write</div><h2 class="hello" style="font-size:28px" id="writeTitle">Today’s blessings</h2></div>
+  <div class="head"><div class="brand" id="writeBrand">Write</div><h2 class="hello" style="font-size:28px" id="writeTitle">Five things</h2></div>
   <div class="sets" id="sets"></div>
   <div class="prompt"><p id="writePrompt"></p><button type="button" id="shuffle">Another prompt</button></div>
   <div id="fields"></div>
@@ -182,7 +182,7 @@ textarea::placeholder,input::placeholder{color:rgba(167,159,174,.7)}
     Animals:['Which animal made you smile?','What soft, warm, or silly moment was there?','Who waited for you at the door?']
   };
   const MOODS=['Grateful','Glad','Calm','Tired','Low'];
-  let entries=load(), mood=null, lines=3, filter='All', setName='Today', promptIndex=0, editing=null, cursor=new Date(), openId=null;
+  let entries=load(), mood=null, lines=5, filter='All', setName='Today', promptIndex=0, editing=null, cursor=new Date(), openId=null;
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
   function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(d)?d:[]}catch(e){return[]}}
   function persist(){localStorage.setItem(KEY,JSON.stringify(entries))}
@@ -228,7 +228,7 @@ textarea::placeholder,input::placeholder{color:rgba(167,159,174,.7)}
     $('#writePrompt').textContent=prompt();
     $('#moods').innerHTML=MOODS.map(m=>`<button class="mood${mood===m?' on':''}" data-mood="${m}" type="button">${m}</button>`).join('');
     const existing=editing?entries.find(e=>e.id===editing):null;
-    $('#writeTitle').textContent=existing?'Edit this page':'Today’s blessings';
+    $('#writeTitle').textContent=existing?'Edit this page':'Five things';
     $('#fields').innerHTML=Array.from({length:lines},(_,i)=>`<label class="field"><span class="num">${i+1}</span><textarea>${existing&&existing.blessings[i]?esc(existing.blessings[i]):''}</textarea></label>`).join('');
     if(existing){$('#why').value=existing.reflection||''}
   }
@@ -274,16 +274,16 @@ textarea::placeholder,input::placeholder{color:rgba(167,159,174,.7)}
   $('#begin').onclick=()=>{localStorage.setItem(SEEN,'1');show('home')};
   $('#usePrompt').onclick=()=>{editing=null;show('write')};
   $('#shuffle').onclick=()=>{promptIndex++;renderWrite()};
-  $('#addLine').onclick=()=>{if(lines<6){lines++;renderWrite()}};
+  $('#addLine').onclick=()=>{if(lines<8){lines++;renderWrite()}};
   $('#sets').onclick=e=>{const b=e.target.closest('[data-set]');if(!b)return;setName=b.dataset.set;promptIndex=0;renderWrite()};
   $('#moods').onclick=e=>{const b=e.target.closest('.mood');if(!b)return;mood=b.dataset.mood;renderWrite()};
   $('#save').onclick=()=>{
     const blessings=$$('#fields textarea').map(t=>t.value.trim()).filter(Boolean);
-    if(!blessings.length){toast('Write one blessing first.');return}
+    if(blessings.length<5){toast('Name five things.');return}
     if(!mood){toast('Choose how you are landing.');return}
     if(editing){const e=entries.find(x=>x.id===editing);if(e){e.blessings=blessings;e.mood=mood;e.reflection=$('#why').value.trim()}}
     else entries.push({id:Date.now().toString(36),date:todayKey(),mood,blessings,reflection:$('#why').value.trim(),createdAt:new Date().toISOString(),starred:false});
-    persist();editing=null;$('#why').value='';mood=null;lines=3;toast('Saved. Well noticed.');show('home');
+    persist();editing=null;$('#why').value='';mood=null;lines=5;toast('Saved. Well noticed.');show('home');
   };
   $('#q').oninput=renderHistory;
   $('#filters').onclick=e=>{const b=e.target.closest('[data-f]');if(!b)return;filter=b.dataset.f;renderHistory()};
@@ -295,7 +295,7 @@ textarea::placeholder,input::placeholder{color:rgba(167,159,174,.7)}
   });
   $('#backList').onclick=()=>show('history');
   $('#starBtn').onclick=()=>{const e=entries.find(x=>x.id===openId);if(!e)return;e.starred=!e.starred;persist();toast(e.starred?'Kept close.':'Unpinned.');renderPage()};
-  $('#editBtn').onclick=()=>{const e=entries.find(x=>x.id===openId);if(!e)return;editing=e.id;mood=e.mood;lines=Math.max(3,(e.blessings||[]).length);show('write')};
+  $('#editBtn').onclick=()=>{const e=entries.find(x=>x.id===openId);if(!e)return;editing=e.id;mood=e.mood;lines=Math.max(5,(e.blessings||[]).length);show('write')};
   $('#delBtn').onclick=()=>{if(!confirm('Remove this page?'))return;entries=entries.filter(x=>x.id!==openId);persist();toast('Removed.');show('history')};
   $('#prev').onclick=()=>{cursor.setMonth(cursor.getMonth()-1);renderCal()};
   $('#next').onclick=()=>{cursor.setMonth(cursor.getMonth()+1);renderCal()};

@@ -22,7 +22,7 @@ button{cursor:pointer}
 .sky:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,20,28,.45),rgba(18,20,28,.62) 40%,rgba(18,20,28,.78))}
 .screen{position:absolute;inset:0;z-index:1;display:none;flex-direction:column;padding:max(22px,env(safe-area-inset-top)) 20px calc(92px + var(--safe));overflow:auto}
 .screen.active{display:flex}
-#cover{padding:max(24px,env(safe-area-inset-top)) 0 max(28px,var(--safe));justify-content:center;align-items:center;gap:28px;background:#0b0e16}
+#cover{padding:0;justify-content:flex-end;align-items:center;background:#0b0e16 center/cover no-repeat url("cover-phone.jpg")}
 #cover:before{display:none}
 #cover .open-wrap,#lock .open-wrap{position:relative;z-index:1;width:min(100%,420px);padding:0 22px max(28px,var(--safe));text-align:center}
 #welcome,#lock{align-items:center;justify-content:center;text-align:center;padding-bottom:max(28px,var(--safe))}
@@ -87,7 +87,6 @@ textarea::placeholder,input::placeholder{color:rgba(167,159,174,.7)}
 <div class="sky"></div>
 <div class="app">
 <section id="cover" class="screen active" aria-label="Serenity">
-  <img src="hero.jpg" alt="Serenity Gratitude Journal" style="width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;display:block"/>
   <div class="open-wrap"><button class="btn" id="open">Open journal</button><p class="fine">Pause. Notice. Write it down.</p></div>
 </section>
 <section id="lock" class="screen">
@@ -103,7 +102,7 @@ textarea::placeholder,input::placeholder{color:rgba(167,159,174,.7)}
 </section>
 <section id="home" class="screen">
   <div class="head"><div class="brand">Serenity</div><h2 class="hello" id="hello">Good evening</h2><p class="lede" id="todayLine"></p></div>
-  <img src="hero.jpg" alt="" style="width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;border-radius:16px;margin:2px 0 16px;border:1px solid rgba(255,255,255,.08);display:block"/>
+  <img src="cover-fit.jpg" alt="" style="width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:16px;margin:2px 0 16px;border:1px solid rgba(255,255,255,.08);display:block"/>
   <div class="prompt"><div class="kicker">Today’s prompt</div><p id="homePrompt"></p><button type="button" id="usePrompt">Write from this</button></div>
   <div class="stats">
     <div class="stat"><small>Streak</small><strong id="streak">0</strong></div>

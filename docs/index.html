@@ -19,8 +19,8 @@ html,body{height:100%;background:#12141c;color:var(--ink);font-family:var(--ui);
 button,input,textarea{font:inherit;color:inherit;background:none;border:none;outline:none}
 button{cursor:pointer}
 .sky{position:fixed;inset:0;z-index:0;pointer-events:none;background:#12141c center/cover no-repeat url("bg.jpg")}
-.sky:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,20,28,.28),rgba(18,20,28,.55) 45%,rgba(18,20,28,.72))}
-.screen{position:absolute;inset:0;z-index:1;display:none;flex-direction:column;padding:max(18px,env(safe-area-inset-top)) 18px calc(84px + var(--safe));overflow:auto}
+.sky:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,20,28,.45),rgba(18,20,28,.62) 40%,rgba(18,20,28,.78))}
+.screen{position:absolute;inset:0;z-index:1;display:none;flex-direction:column;padding:max(22px,env(safe-area-inset-top)) 20px calc(92px + var(--safe));overflow:auto}
 .screen.active{display:flex}
 #cover{padding:0;justify-content:flex-end;align-items:center;background:#05070d center/cover no-repeat url("cover-phone.jpg")}
 #cover:before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,7,13,.88),transparent 46%)}
@@ -32,18 +32,18 @@ h1,h2.hello{font-family:var(--display);font-weight:600;line-height:1}
 h1{font-size:42px;margin:8px 0 14px}
 .hello{font-size:36px;letter-spacing:-.02em}
 .lede{color:var(--muted);font-size:15px;line-height:1.5}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:14px 28px;border-radius:999px;background:linear-gradient(135deg,#0f766e,#5eead4);color:#042f2e;font-weight:600;letter-spacing:.02em;width:min(100%,280px);box-shadow:0 10px 28px rgba(45,212,191,.25)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:14px 28px;border-radius:999px;background:#14b8a6;color:#042f2e;font-weight:600;letter-spacing:.01em;width:min(100%,280px)}
 .btn.wide{width:100%}
 .fine{margin-top:12px;font-size:12px;color:rgba(167,159,174,.85)}
 .wcard{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:10px 0}
 .wcard b{display:block;font-weight:500;margin-bottom:4px}
 .head{margin-bottom:14px}
 .brand{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:500}
-.prompt{background:linear-gradient(180deg,rgba(246,231,161,.12),rgba(22,26,38,.72));border:1px solid rgba(246,231,161,.32);border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 12px 28px rgba(0,0,0,.22)}
+.prompt{background:rgba(22,26,38,.72);border:1px solid rgba(246,231,161,.22);border-radius:16px;padding:18px;margin-bottom:16px}
 .prompt p{font-family:var(--display);font-style:italic;font-size:22px;line-height:1.25}
 .prompt button,.linkish{color:var(--teal);font-weight:500;font-size:14px;margin-top:8px}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.stat,.card,.field,.tool{background:var(--card);border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 10px 26px rgba(0,0,0,.2)}
+.stat,.card,.field,.tool{background:rgba(22,26,38,.7);border:1px solid rgba(255,255,255,.08);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .stat{padding:12px}.stat small{display:block;color:var(--muted);font-size:12px}.stat strong{font-size:20px;font-weight:500}
 .section{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:10px 0 8px}
 .week,.filters,.sets{display:flex;gap:8px;overflow:auto;scrollbar-width:none;margin-bottom:12px}
@@ -72,7 +72,7 @@ textarea::placeholder,input::placeholder{color:rgba(167,159,174,.7)}
 .tools{display:flex;flex-direction:column;gap:8px}
 .tool{padding:14px;text-align:left;width:100%}
 .tool small{display:block;color:var(--muted);margin-top:3px}
-.nav{position:fixed;left:12px;right:12px;bottom:calc(8px + var(--safe));z-index:5;display:none;grid-template-columns:repeat(5,1fr);gap:2px;padding:6px;background:rgba(18,20,28,.82);border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 8px 24px rgba(0,0,0,.28)}
+.nav{position:fixed;left:16px;right:16px;bottom:calc(10px + var(--safe));z-index:5;display:none;grid-template-columns:repeat(5,1fr);gap:2px;padding:6px;background:rgba(18,20,28,.9);border:1px solid rgba(255,255,255,.08);border-radius:16px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .nav.show{display:grid}
 .nav button{padding:9px 2px;border-radius:12px;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:.04em}
 .nav button.on{color:#5eead4;background:rgba(45,212,191,.14)}
@@ -102,7 +102,7 @@ textarea::placeholder,input::placeholder{color:rgba(167,159,174,.7)}
 </section>
 <section id="home" class="screen">
   <div class="head"><div class="brand">Serenity</div><h2 class="hello" id="hello">Good evening</h2><p class="lede" id="todayLine"></p></div>
-  <img src="hero.jpg" alt="" style="width:100%;height:188px;object-fit:cover;border-radius:22px;margin:4px 0 16px;border:1px solid rgba(246,231,161,.28);box-shadow:0 18px 40px rgba(0,0,0,.35)"/>
+  <img src="hero.jpg" alt="" style="width:100%;height:150px;object-fit:cover;border-radius:16px;margin:2px 0 18px;border:1px solid rgba(255,255,255,.08)"/>
   <div class="prompt"><div class="kicker">Today’s prompt</div><p id="homePrompt"></p><button type="button" id="usePrompt">Write from this</button></div>
   <div class="stats">
     <div class="stat"><small>Streak</small><strong id="streak">0</strong></div>
